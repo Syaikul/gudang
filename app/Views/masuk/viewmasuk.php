@@ -1,0 +1,72 @@
+<?= $this->extend('main/layout') ?>
+
+<?= $this->section('judul') ?>
+Masuk
+<?= $this->endSection() ?>
+
+<?= $this->section('subjudul') ?>
+<?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Data', [
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('" . site_url('masuk/tambahmasuk') . "')"
+]) ?>
+<?= $this->endSection() ?>
+
+<?= $this->section('isi') ?>
+<table class="table table-striped table-bordered" style="width:100%;" id='tabel'>
+    <thead>
+        <tr>
+            <th style="width: 5%;">No</th>
+            <th>Nama Barang</th>
+            <th>Jumlah Barang Masuk</th>
+            <th>Tanggal Masuk</th>
+            <th style="width: 15%;">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($tampildata)) : ?>
+            <?php $nomor = 1; ?>
+
+            <?php foreach ($tampildata as $row) : ?>
+                <tr>
+                    <td><?= $nomor++ ?></td>
+                    <td><?= esc($row['brgnama']) ?></td>
+                    <td><?= esc($row['mskjumlah']) ?></td>
+                    <td><?= date('d-m-Y', strtotime($row['msktanggal'])) ?></td>
+                    <td>
+                        <button type="button" class="btn btn-info" title="Edit Masuk" onclick="edit('<?= $row['mskkode'] ?>')">
+                            <i class="fa fa-edit"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-danger" title="Hapus Masuk" onclick="hapus('<?= $row['mskkode'] ?>')">
+                            <i class="fa fa-trash-alt"></i>
+                        </button>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <tr>
+                <td colspan="5" class="text-center">Tidak ada data barang masuk.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+
+<script>
+    function edit(id) {
+        window.location = "<?= site_url('masuk/editmasuk') ?>/" + id;
+    }
+
+
+    function hapus(id) {
+        var pesan = confirm('Apakah Anda yakin ingin menghapus barang masuk ini?');
+        if (pesan) {
+            // Mengarahkan ke URL yang benar, pastikan ada ID di akhir URL
+            window.location = "<?= site_url('masuk/hapusmasuk') ?>/" + id;
+
+        } else {
+            return false;
+        }
+    }
+</script>
+<?= $this->endSection() ?>
