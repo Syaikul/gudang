@@ -11,9 +11,14 @@ Form Tambah Barang Keluar
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
+<?= form_button('', '<i class="fa fa-backward"></i> Kembali', [
+    'class' => 'btn btn-warning',
+    'onclick' => "location.href=('" . site_url('keluar/index') . "')"
+]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('isi') ?>
+<?= session()->getFlashdata('sukses'); ?>
 
 
 <form action="<?= base_url('/keluar/simpankeluar') ?>" method="post">

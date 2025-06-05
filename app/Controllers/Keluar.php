@@ -83,7 +83,12 @@ class Keluar extends BaseController
             'klrketerangan' => $this->request->getPost('keterangan'),
         ]);
 
-        return redirect()->to('/keluar/tambahkeluar')->with('sukses', 'Data barang keluar berhasil disimpan.');
+        $pesan = [
+            'sukses' => '<div class="alert alert-success">berhasil ditambahkan...</div>'
+        ];
+
+        session()->setFlashdata($pesan);
+        return redirect()->to('/keluar/tambahkeluar');
     }
     public function editkeluar($id)
     {
@@ -176,7 +181,15 @@ class Keluar extends BaseController
 
         $modelKeluar->update($id, $dataUpdate);
 
-        return redirect()->to('/keluar/index')->with('sukses', 'Data barang keluar berhasil diperbarui.');
+        $pesan = [
+            'sukses' => '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  Data barang Keluar berhasil diperbarui
+                </div>'
+        ];
+
+        session()->setFlashdata($pesan);
+        return redirect()->to('/keluar/index');
     }
 
     public function hapuskeluar($id)
@@ -205,7 +218,14 @@ class Keluar extends BaseController
             // Hapus data keluar
             $modelKeluar->delete($id);
 
-            session()->setFlashdata('sukses', 'Data berhasil dihapus dan stok barang dikembalikan.');
+            $pesan = [
+                'sukses' => '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  Data barang keluar berhasil dihapus
+                </div>'
+            ];
+
+            session()->setFlashdata($pesan);
         } else {
             session()->setFlashdata('error', 'Data tidak ditemukan.');
         }

@@ -10,7 +10,9 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?= base_url() ?>/plugins/fontawesome-free/css/all.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url() ?>/plugins/fontawesome-free/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url() ?>/dist/css/adminlte.min.css">
     <!-- datatable
@@ -18,7 +20,7 @@
     <link href="https://cdn.datatables.net/v/bs4/jq-3.7.0/jszip-3.10.1/dt-2.3.1/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/datatables.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -42,9 +44,9 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class=" main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="<?= base_url() ?>/index3.html" class="brand-link">
+            <a href="https://www.mesitechmitra.co.id" class="brand-link">
                 <img src="<?= base_url() ?>/dist/img/Logo.jpeg" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">MESITECHMITRA</span>
@@ -59,7 +61,8 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Atmin</a>
+                        <a href="#" class="d-block"><?= user()->username; ?>
+                        </a>
                     </div>
                 </div>
 
@@ -69,58 +72,85 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
+
+                        <?php if (in_groups('admin')) : ?>
+                            <li class="nav-header">Master
+                            <li class="nav-item">
+                                <a href="<?= site_url('kategori/index'); ?>" class="nav-link">
+                                    <i class="fa-solid fa-list mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                    <p class="text">Kategori</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= site_url('satuan/index'); ?>" class="nav-link">
+                                    <i class="fa-solid fa-cart-flatbed mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                    <p class="text">Satuan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= site_url('client/index'); ?>" class="nav-link">
+                                    <i class="fa-solid fa-user-tie mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                    <p class="text">Client</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
                         <li class="nav-header">Master</li>
                         <li class="nav-item">
-                            <a href="<?= site_url('kategori/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
-                                <p class="text">Kategori</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('satuan/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
-                                <p class="text">Satuan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?= site_url('barang/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
+                                <i class="fa-solid fa-boxes-stacked mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
                                 <p class="text">Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= site_url('client/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
-                                <p class="text">Client</p>
-                            </a>
-                        </li>
-                        <li class="nav-header">Master</li>
-                        <li class="nav-item">
                             <a href="<?= site_url('masuk/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
+                                <i class="fa-solid fa-inbox mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
                                 <p class="text">Masuk</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= site_url('keluar/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
+                                <i class="fa-solid fa-outdent mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
                                 <p class="text">Keluar</p>
                             </a>
                         </li>
 
+                        <?php if (in_groups('admin') || in_groups('manager')) : ?>
+                            <li class="nav-header">Master</li>
+                        <?php endif; ?>
+                        <?php if (in_groups('admin')) : ?>
+                            <li class="nav-item">
+                                <a href="<?= site_url('request/index'); ?>" class="nav-link">
+                                    <i class="fa-solid fa-receipt mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                    <p class="text">Request Barang</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (in_groups('admin') || in_groups('manager')) : ?>
+                            <li class="nav-item">
+                                <a href="<?= site_url('biaya/index'); ?>" class="nav-link">
+                                    <i class="fa-solid fa-credit-card mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                    <p class="text">Ringkasan Biaya</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
                         <li class="nav-header">Master</li>
+                        <?php if (in_groups('admin')) : ?>
+                            <li class="nav-item">
+                                <a href="<?= site_url('user/index'); ?>" class="nav-link">
+                                    <i class="fa-solid fa-users-viewfinder mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                    <p class="text">User List</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item">
-                            <a href="<?= site_url('request/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
-                                <p class="text">Request Barang</p>
+                            <a href="<?= site_url('/logout'); ?>" class="nav-link">
+                                <i class="fa-solid fa-right-from-bracket mr-2" style="width: 20px; display: inline-block; text-align: center;"></i>
+                                <p class="text">Logout</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('biaya/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-tasks"></i>
-                                <p class="text">Ringkasan Biaya</p>
-                            </a>
-                        </li>
+
 
                     </ul>
                 </nav>

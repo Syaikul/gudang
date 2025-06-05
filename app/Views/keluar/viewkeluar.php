@@ -5,10 +5,12 @@ Barang Keluar
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
-<?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Data', [
-    'class' => 'btn btn-primary',
-    'onclick' => "location.href=('" . site_url('keluar/tambahkeluar') . "')"
-]) ?>
+<?php if (in_groups('admin')) : ?>
+    <?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Data', [
+        'class' => 'btn btn-primary',
+        'onclick' => "location.href=('" . site_url('keluar/tambahkeluar') . "')"
+    ]) ?>
+<?php endif; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('isi') ?>
@@ -28,7 +30,10 @@ Barang Keluar
             <th>Jumlah Barang Keluar</th>
             <th>Tanggal Keluar</th>
             <th>Client</th>
-            <th style="width: 15%;">Aksi</th>
+            <?php if (in_groups('admin')) : ?>
+                <th style="width: 15%;">Aksi</th>
+            <?php endif; ?>
+
         </tr>
     </thead>
     <tbody>
@@ -41,14 +46,17 @@ Barang Keluar
                     <td><?= esc($row['klrjumlah']) ?></td>
                     <td><?= date('d-m-Y', strtotime($row['klrtanggal'])) ?></td>
                     <td><?= esc($row['clientnama']) ?></td>
-                    <td>
-                        <button type="button" class="btn btn-info" title="Edit Keluar" onclick="edit('<?= $row['klrkode'] ?>')">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger" title="Hapus Keluar" onclick="hapus('<?= $row['klrkode'] ?>')">
-                            <i class="fa fa-trash-alt"></i>
-                        </button>
-                    </td>
+                    <?php if (in_groups('admin')) : ?>
+                        <td>
+                            <button type="button" class="btn btn-info" title="Edit Keluar" onclick="edit('<?= $row['klrkode'] ?>')">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" title="Hapus Keluar" onclick="hapus('<?= $row['klrkode'] ?>')">
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    <?php endif; ?>
+
                 </tr>
             <?php endforeach; ?>
         <?php else : ?>

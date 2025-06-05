@@ -5,21 +5,27 @@ Masuk
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
-<?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Data', [
-    'class' => 'btn btn-primary',
-    'onclick' => "location.href=('" . site_url('masuk/tambahmasuk') . "')"
-]) ?>
+<?php if (in_groups('admin')) : ?>
+    <?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Data', [
+        'class' => 'btn btn-primary',
+        'onclick' => "location.href=('" . site_url('masuk/tambahmasuk') . "')"
+    ]) ?>
+<?php endif; ?>
 <?= $this->endSection() ?>
 
+
 <?= $this->section('isi') ?>
+<?= session()->getFlashdata('sukses'); ?>
 <table class="table table-striped table-bordered" style="width:100%;" id='tabel'>
     <thead>
         <tr>
             <th style="width: 5%;">No</th>
             <th>Nama Barang</th>
             <th>Jumlah Barang Masuk</th>
-            <th>Tanggal Masuk</th>
-            <th style="width: 15%;">Aksi</th>
+            <th style="width: 15%;">Tanggal Masuk</th>
+            <?php if (in_groups('admin')) : ?>
+                <th style="width: 15%;">Aksi</th>
+            <?php endif; ?>
         </tr>
     </thead>
     <tbody>
@@ -32,16 +38,18 @@ Masuk
                     <td><?= esc($row['brgnama']) ?></td>
                     <td><?= esc($row['mskjumlah']) ?></td>
                     <td><?= date('d-m-Y', strtotime($row['msktanggal'])) ?></td>
-                    <td>
-                        <button type="button" class="btn btn-info" title="Edit Masuk" onclick="edit('<?= $row['mskkode'] ?>')">
-                            <i class="fa fa-edit"></i>
-                        </button>
+                    <?php if (in_groups('admin')) : ?>
+                        <td>
+                            <button type="button" class="btn btn-info" title="Edit Masuk" onclick="edit('<?= $row['mskkode'] ?>')">
+                                <i class="fa fa-edit"></i>
+                            </button>
 
-                        <button type="button" class="btn btn-danger" title="Hapus Masuk" onclick="hapus('<?= $row['mskkode'] ?>')">
-                            <i class="fa fa-trash-alt"></i>
-                        </button>
+                            <button type="button" class="btn btn-danger" title="Hapus Masuk" onclick="hapus('<?= $row['mskkode'] ?>')">
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
 
-                    </td>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
         <?php else : ?>

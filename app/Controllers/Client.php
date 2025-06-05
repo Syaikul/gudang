@@ -44,7 +44,7 @@ class Client extends BaseController
 
         if (!$valid) {
             $pesan = [
-                'errorNamaClient' => '<div class="alert alert-danger alert-dismissible">' . $validation->getError('namaclient') . '</div>'
+                'errorNamaClient' => '<div class="alert alert-danger alert-dismissible">' . $validation->getError('namaclient') . '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'
             ];
             session()->setFlashdata($pesan);
             return redirect()->to('/client/tambahclient');
@@ -53,7 +53,11 @@ class Client extends BaseController
                 'clientnama' => $namaclient
             ]);
 
-            session()->setFlashdata('sukses', 'Client berhasil ditambahkan');
+            $pesan = [
+                'sukses' => '<div class="alert alert-success"> Data Client berhasil ditambahkan...</div>'
+            ];
+
+            session()->setFlashdata($pesan);
             return redirect()->to('/client/index');
         }
     }
@@ -101,7 +105,13 @@ class Client extends BaseController
                 'clientnama' => $namaclient
             ]);
 
-            session()->setFlashdata('sukses', 'Client berhasil diperbarui');
+            $pesan = [
+                'sukses' => '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  Client berhasil perbarui
+                </div>'
+            ];
+            session()->setFlashdata($pesan);
             return redirect()->to('/client/index');
         }
     }
@@ -112,7 +122,14 @@ class Client extends BaseController
         if ($rowData) {
             $this->client->delete($id);
 
-            session()->setFlashdata('sukses', 'Client berhasil dihapus');
+            $pesan = [
+                'sukses' => '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  Client berhasil dihapus
+                </div>'
+            ];
+            session()->setFlashdata($pesan);
+
             return redirect()->to('/client/index');
         } else {
             exit('Data tidak ditemukan');

@@ -12,7 +12,7 @@ class UpdateBarangAddDeskripsi extends Migration
             'brgdeskripsi' => [
                 'type' => 'TEXT',
                 'null' => true,
-                'after' => 'brgsatid' // atau sesuaikan dengan kolom terakhir sebelum deskripsi
+                'after' => 'brgsatid'
             ]
         ]);
     }

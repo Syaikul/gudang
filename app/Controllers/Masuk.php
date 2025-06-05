@@ -78,7 +78,12 @@ class Masuk extends BaseController
             ]);
         }
 
-        return redirect()->to('/masuk/index')->with('sukses', 'Data barang masuk berhasil disimpan dan stok diperbarui.');
+        $pesan = [
+            'sukses' => '<div class="alert alert-success">berhasil ditambahkan...</div>'
+        ];
+
+        session()->setFlashdata($pesan);
+        return redirect()->to('/masuk/tambahmasuk');
     }
 
 
@@ -151,8 +156,15 @@ class Masuk extends BaseController
         ];
         $modelMasuk->update($id, $data);
 
-        session()->setFlashdata('sukses', 'Data barang masuk berhasil diperbarui dan stok disesuaikan.');
-        return redirect()->to('/masuk');
+        $pesan = [
+            'sukses' => '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  Data barang masuk berhasil diperbarui
+                </div>'
+        ];
+
+        session()->setFlashdata($pesan);
+        return redirect()->to('/masuk/index');
     }
 
 
@@ -178,7 +190,14 @@ class Masuk extends BaseController
             // Hapus data masuk
             $modelMasuk->delete($id);
 
-            session()->setFlashdata('sukses', 'Data berhasil dihapus dan stok barang dikurangi.');
+            $pesan = [
+                'sukses' => '<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  Data barang masuk berhasil dihapus
+                </div>'
+            ];
+
+            session()->setFlashdata($pesan);
         } else {
             session()->setFlashdata('error', 'Data tidak ditemukan.');
         }

@@ -5,10 +5,12 @@ Barang
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
-<?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Barang', [
-    'class' => 'btn btn-primary',
-    'onclick' => "location.href=('" . site_url('barang/tambahbarang') . "')"
-]) ?>
+<?php if (in_groups('admin')) : ?>
+    <?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Barang', [
+        'class' => 'btn btn-primary',
+        'onclick' => "location.href=('" . site_url('barang/tambahbarang') . "')"
+    ]) ?>
+<?php endif; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('isi') ?>
@@ -23,7 +25,9 @@ Barang
             <th>Kategori</th>
             <th>Satuan</th>
             <th>Stok</th>
-            <th style="width: 15%;">Aksi</th>
+            <?php if (in_groups('admin')) : ?>
+                <th style="width: 15%;">Aksi</th>
+            <?php endif; ?>
         </tr>
     </thead>
     <tbody>
@@ -36,14 +40,16 @@ Barang
                     <td><?= $row['katnama']; ?></td>
                     <td><?= $row['satnama']; ?></td>
                     <td><?= number_format($row['brgstok'], 0); ?></td>
-                    <td>
-                        <button type="button" class="btn btn-info" title="Edit barang" onclick="edit('<?= $row['brgkode'] ?>')">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger" title="Hapus Barang" onclick="hapus('<?= $row['brgkode'] ?>')">
-                            <i class="fa fa-trash-alt"></i>
-                        </button>
-                    </td>
+                    <?php if (in_groups('admin')) : ?>
+                        <td>
+                            <button type="button" class="btn btn-info" title="Edit barang" onclick="edit('<?= $row['brgkode'] ?>')">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" title="Hapus Barang" onclick="hapus('<?= $row['brgkode'] ?>')">
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach ?>
         <?php else : ?>
@@ -53,10 +59,6 @@ Barang
         <?php endif; ?>
     </tbody>
 </table>
-
-<?= $this->endSection() ?>
-
-<?= $this->section('script') ?>
 <script>
     function edit(id) {
         window.location = "<?= site_url('barang/editbarang') ?>/" + id;

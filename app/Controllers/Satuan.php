@@ -43,7 +43,7 @@ class Satuan extends BaseController
         ]);
         if (!$valid) {
             $pesan = [
-                'errorNamaSatuan' => '<br><div class="alert alert-danger">' . $validation->getError('namasatuan') . '</div>'
+                'errorNamaSatuan' => '<br><div class="alert alert-danger">' . $validation->getError('namasatuan') . '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'
             ];
 
             session()->setFlashdata($pesan);

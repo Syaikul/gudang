@@ -7,7 +7,7 @@ Form Edit Data Masuk
 <?= $this->section('subjudul') ?>
 <?= form_button('', '<i class="fa fa-backward"></i> Kembali', [
     'class' => 'btn btn-warning',
-    'onclick' => "location.href=('" . site_url('masuk/index') . "')"
+    'onclick' => "location.href=('" . site_url('kategori/index') . "')"
 ]) ?>
 <?= $this->endSection() ?>
 <?= $this->section('isi') ?>

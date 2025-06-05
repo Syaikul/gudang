@@ -9,6 +9,10 @@ Form Tambah Barang Masuk
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
+<?= form_button('', '<i class="fa fa-backward"></i> Kembali', [
+    'class' => 'btn btn-warning',
+    'onclick' => "location.href=('" . site_url('masuk/index') . "')"
+]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('isi') ?>

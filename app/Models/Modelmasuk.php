@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Modelmasuk extends Model
 {
     protected $table            = 'masuk';
-    protected $primaryKey       = 'mskkode ';
+    protected $primaryKey       = 'mskkode';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;

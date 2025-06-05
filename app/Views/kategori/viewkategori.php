@@ -41,33 +41,8 @@ Manajemen data kategori
                         <i class="fa fa-trash-alt"></i>
                     </button>
                 </td>
-
             </tr>
         <?php endforeach ?>
-
-        <?php
-        $nomor = 1;
-        $max_rows = 20; // batas maksimal baris
-        $count = 0;
-
-        foreach ($tampildata as $row):
-            if (isset($row['show']) && $row['show'] == 1): // pengecekan show == 1
-                if ($count >= $max_rows) break;
-        ?>
-                <tr>
-                    <td><?= $nomor++; ?></td>
-                    <td><?= $row['katnama']; ?></td>
-                    <td>
-                        <a href="<?= base_url('kategori/hapus/' . $row['katid']) ?>" class="btn btn-danger hapus">Hapus</a>
-                        <button class="btn btn-warning edit" data-id="<?= $row['katid'] ?>">Edit</button>
-                    </td>
-                </tr>
-        <?php
-                $count++;
-            endif;
-        endforeach;
-        ?>
-
     </body>
 </table>
 <script>

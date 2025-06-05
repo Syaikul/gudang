@@ -119,7 +119,7 @@ class Barang extends BaseController
             $sess_Pesan = [
                 'error' => '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-ban"></i> Alert!</h5>'
+                <h5></h5>'
                     . $validation->listErrors() .
                     '</div>'
             ];
@@ -153,7 +153,7 @@ class Barang extends BaseController
             $pesan_sukses = [
                 'sukses' => '<div class="alert alert-success alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
+                  <h5></h5>
                   <strong>' . $namabarang . '</strong> Berhasil ditambahkan
                 </div>'
             ];
@@ -264,7 +264,7 @@ class Barang extends BaseController
             $sess_Pesan = [
                 'error' => '<div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>'
+            <h5></h5>'
                     . $validation->listErrors() .
                     '</div>'
             ];
@@ -311,7 +311,7 @@ class Barang extends BaseController
             $pesan_sukses = [
                 'sukses' => '<div class="alert alert-success alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
+              <h5></h5>
               data <strong>' . $namabarang . '</strong> Berhasil diperbarui
             </div>'
             ];
@@ -342,7 +342,7 @@ class Barang extends BaseController
             $pesan_sukses = [
                 'sukses' => '<div class="alert alert-success alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
+              <h5></h5>
               <strong>' . $namabarang . '</strong> Berhasil dihapus
             </div>'
             ];
@@ -353,7 +353,7 @@ class Barang extends BaseController
             $pesan_error = [
                 'error' => '<div class="alert alert-danger alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h5><i class="icon fas fa-ban"></i> Error!</h5>
+              <h5></h5>
               data barang tidak ditemukan
             </div>'
             ];
