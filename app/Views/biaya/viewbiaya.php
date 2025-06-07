@@ -1,7 +1,7 @@
 <?= $this->extend('main/layout') ?>
 
 <?= $this->section('judul') ?>
-Buat Biaya Barang
+Laporan Biaya pengeluaran
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>

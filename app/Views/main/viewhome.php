@@ -5,19 +5,17 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
-Home
+<h2 class="text-center">Tabel dan Grafik Barang Masuk / Keluar Tahun <?= date('Y'); ?></h2>
 <?= $this->endSection() ?>
 
 <?= $this->section('isi') ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <section class="content">
     <div class="row">
         <div class="col-md-6">
-            <table class="table table-striped table-bordered" style="width:100%;">
+            <table class="table table-bordered table-striped" id="normal">
                 <thead>
                     <tr>
-                        <th style="width: 5%;">No</th>
+                        <th>No</th>
                         <th>Nama Barang</th>
                         <th>Status</th>
                         <th>Jumlah</th>
@@ -25,37 +23,44 @@ Home
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($aktivitas)): ?>
-                        <?php $nomor = 1; ?>
-                        <?php foreach ($aktivitas as $row): ?>
+                    <?php if (!empty($dataGabungan)) : ?>
+                        <?php $no = 1;
+                        foreach ($dataGabungan as $row) : ?>
                             <tr>
-                                <td><?= $nomor++; ?></td>
-                                <td><?= esc($row['nama']); ?></td>
-                                <td><?= esc($row['status']); ?></td>
+                                <td><?= $no++; ?></td>
+                                <td><?= esc($row['brgnama']); ?></td>
+                                <td>
+                                    <?php if ($row['status'] == 'Masuk') : ?>
+                                        <span class="badge badge-success">Masuk</span>
+                                    <?php else : ?>
+                                        <span class="badge badge-danger">Keluar</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?= esc($row['jumlah']); ?></td>
                                 <td><?= date('d-m-Y', strtotime($row['tanggal'])); ?></td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php else : ?>
                         <tr>
-                            <td colspan="5" class="text-center">Tidak ada data aktivitas</td>
+                            <td colspan="5" class="text-center">Tidak ada data barang masuk/keluar</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
         <div class="col-md-6">
-            <canvas id="chartjs-line" width="400" height="300"></canvas>
+            <canvas id="chartjs-line" style="width: 100%; height: 400px;"></canvas>
         </div>
     </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const ctx = document.getElementById("chartjs-line").getContext("2d");
 
-        const barangMasuk = <?= isset($grafikMasuk) ? json_encode(array_values($grafikMasuk)) : '[]'; ?>;
-        const barangKeluar = <?= isset($grafikKeluar) ? json_encode(array_values($grafikKeluar)) : '[]'; ?>;
+        const barangMasuk = <?= json_encode($grafikMasuk); ?>;
+        const barangKeluar = <?= json_encode($grafikKeluar); ?>;
 
         new Chart(ctx, {
             type: "line",
@@ -63,40 +68,38 @@ Home
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
                         label: "Barang Masuk",
-                        fill: true,
-                        backgroundColor: "transparent",
-                        borderColor: "#007bff",
+                        fill: false,
+                        borderColor: "#075B5E",
+                        backgroundColor: "#075B5E",
+                        tension: 0.3,
                         data: barangMasuk
                     },
                     {
                         label: "Barang Keluar",
-                        fill: true,
-                        backgroundColor: "transparent",
-                        borderColor: "#adb5bd",
-                        borderDash: [4, 4],
+                        fill: false,
+                        borderColor: "#FF3F33",
+                        backgroundColor: "#FF3F33",
+                        borderDash: [5, 5],
+                        tension: 0.3,
                         data: barangKeluar
                     }
                 ]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top"
+                    }
+                },
                 scales: {
-                    x: {
-                        grid: {
-                            color: "rgba(0,0,0,0.05)"
-                        }
-                    },
                     y: {
-                        grid: {
-                            color: "rgba(0,0,0,0)",
-                            borderDash: [5, 5]
-                        }
+                        beginAtZero: true
                     }
                 }
             }
         });
     });
 </script>
-
 
 <?= $this->endSection() ?>

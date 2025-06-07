@@ -1,7 +1,7 @@
 <?= $this->extend('main/layout') ?>
 
 <?= $this->section('judul') ?>
-Barang
+Manajemen Data Barang
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>

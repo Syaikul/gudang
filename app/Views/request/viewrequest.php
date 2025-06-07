@@ -1,11 +1,11 @@
 <?= $this->extend('main/layout') ?>
 
 <?= $this->section('judul') ?>
-Buat Permintaan Barang
+Form Permintaan Barang
 <?= $this->endSection() ?>
 
 <?= $this->section('subjudul') ?>
-Form Permintaan Barang Berdasarkan WMA
+Permintaan Barang Berdasarkan WMA (Weighted Moving Average)
 <?= $this->endSection() ?>
 
 <?= $this->section('isi') ?>
